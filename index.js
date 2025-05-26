@@ -7,19 +7,28 @@ const downloadsDir = path.join(baseDir, "downloads");
 const targetBaseDir = baseDir;
 
 function parseFilename(filename) {
-  // Enhanced regex to handle your specific filename format better
-  const match = filename.match(
-    /^CH(\d+)__([^_]+(?:_[^_]+)*)_L(\d+)__([^_]+(?:_[^_]+)*)(?:_L\d+__.*)?(?:_README)?\.(go|md)$/i
+  // First check if it's a README file
+  const isReadme = filename.toLowerCase().includes("readme");
+  
+  // Remove _README part from filename for parsing if present
+  const cleanFilename = filename.replace(/_README/i, '');
+  
+  // Enhanced regex to handle your specific filename format
+  const match = cleanFilename.match(
+    /^CH(\d+)__([^_]+(?:_[^_]+)*)_L(\d+)__([^_]+(?:_[^_]+)*)\.(go|md)$/i
   );
+  
   if (!match) {
     console.log(`⚠️ Could not parse filename: ${filename}`);
+    console.log(`   Cleaned filename: ${cleanFilename}`);
     return null;
   }
 
   const [, chNum, chName, lNum, lName, ext] = match;
   const chapter = `CH${chNum}_${chName}`;
   const lesson = `L${lNum}_${lName}`;
-  const isReadme = filename.toLowerCase().includes("readme");
+
+  console.log(`🔍 Parsed: ${filename} → Chapter: ${chapter}, Lesson: ${lesson}, README: ${isReadme}`);
 
   return { chapter, lesson, ext, isReadme, originalName: filename };
 }
