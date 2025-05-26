@@ -7,20 +7,25 @@ const downloadsDir = path.join(baseDir, "downloads");
 const targetBaseDir = baseDir;
 
 function parseFilename(filename) {
-  // First check if it's a README file
+  // Check if it's a README file
   const isReadme = filename.toLowerCase().includes("readme");
   
-  // Remove _README part from filename for parsing if present
-  const cleanFilename = filename.replace(/_README/i, '');
+  let match;
   
-  // Enhanced regex to handle your specific filename format
-  const match = cleanFilename.match(
-    /^CH(\d+)__([^_]+(?:_[^_]+)*)_L(\d+)__([^_]+(?:_[^_]+)*)\.(go|md)$/i
-  );
+  if (isReadme) {
+    // For README files: CH1__Variables_L1__Learn_Go_(for_Developers)_README.md
+    match = filename.match(
+      /^CH(\d+)__([^_]+(?:_[^_]+)*)_L(\d+)__([^_]+(?:_[^_]+)*)_README\.(md)$/i
+    );
+  } else {
+    // For regular files: CH1__Variables_L1__Learn_Go_(for_Developers)_L1__Learn_Go_(for_Developers).go
+    match = filename.match(
+      /^CH(\d+)__([^_]+(?:_[^_]+)*)_L(\d+)__([^_]+(?:_[^_]+)*)_L\d+__.*\.(go)$/i
+    );
+  }
   
   if (!match) {
     console.log(`⚠️ Could not parse filename: ${filename}`);
-    console.log(`   Cleaned filename: ${cleanFilename}`);
     return null;
   }
 
