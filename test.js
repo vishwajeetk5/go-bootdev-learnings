@@ -1,7 +1,7 @@
 // Test the image parsing logic
 const testImages = [
-  "CH3_Functions_L2_Multiple_Parameters_quiz_result.png",
-  "CH3_Functions_L4_Declaration_Syntax_quiz_result.png",
+  "CH3_Functions_L13_Early_Returns_quiz_result.png",
+  "CH3_Functions_L2_Multiple_Parameters_quiz_result.png", 
   "CH1_Variables_L5_Comments_screenshot.jpg"
 ];
 
@@ -18,54 +18,48 @@ function parseImageFilename(filename) {
   const ext = match[2];
   
   console.log(`   Full name: ${fullName}`);
-  console.log(`   Extension: ${ext}`);
   
-  // Split by underscore and find lesson part
-  const parts = fullName.split('_');
-  console.log(`   Parts: [${parts.join(', ')}]`);
+  // Strategy 1: Look for pattern CHX_ChapterName_LX_LessonName_suffix
+  const lessonMatch = fullName.match(/^(CH\d+_.+?)_(L\d+_.+?)_(?:quiz|result|screenshot|answer).*$/i);
   
-  let chapterParts = [];
-  let lessonParts = [];
-  let foundLesson = false;
-  
-  for (let i = 0; i < parts.length; i++) {
-    console.log(`   Processing part ${i}: "${parts[i]}"`);
+  if (lessonMatch) {
+    const chapter = lessonMatch[1];
+    const lesson = lessonMatch[2];
     
-    if (!foundLesson && parts[i].match(/^L\d+$/)) {
-      // Found lesson number (like L2, L4)
-      console.log(`     → Found lesson number: ${parts[i]}`);
-      foundLesson = true;
-      lessonParts.push(parts[i]);
-    } else if (foundLesson) {
-      // After lesson number, collect lesson name parts until we hit known suffixes
-      if (parts[i] === 'quiz' || parts[i] === 'result' || parts[i] === 'screenshot') {
-        console.log(`     → Stopping at suffix: ${parts[i]}`);
-        break; // Stop at known image suffixes
-      }
-      console.log(`     → Adding to lesson: ${parts[i]}`);
-      lessonParts.push(parts[i]);
-    } else {
-      // Before lesson number, collect chapter parts
-      console.log(`     → Adding to chapter: ${parts[i]}`);
-      chapterParts.push(parts[i]);
+    console.log(`✅ SUCCESS (Strategy 1):`);
+    console.log(`   Chapter: "${chapter}"`);
+    console.log(`   Lesson: "${lesson}"`);
+    return { chapter, lesson, ext };
+  }
+  
+  console.log(`   Strategy 1 failed, trying fallback...`);
+  
+  // Strategy 2: Find last _L and clean suffixes
+  const lastLIndex = fullName.lastIndexOf('_L');
+  if (lastLIndex !== -1) {
+    const beforeL = fullName.substring(0, lastLIndex);
+    const afterL = fullName.substring(lastLIndex + 1);
+    
+    console.log(`   Before L: "${beforeL}"`);
+    console.log(`   After L: "${afterL}"`);
+    
+    // Remove known suffixes from the end
+    const cleanAfterL = afterL.replace(/_(?:quiz|result|screenshot|answer).*$/i, '');
+    console.log(`   Clean after L: "${cleanAfterL}"`);
+    
+    if (cleanAfterL) {
+      const chapter = beforeL;
+      const lesson = 'L' + cleanAfterL;
+      
+      console.log(`✅ SUCCESS (Strategy 2):`);
+      console.log(`   Chapter: "${chapter}"`);
+      console.log(`   Lesson: "${lesson}"`);
+      return { chapter, lesson, ext };
     }
   }
   
-  if (chapterParts.length > 0 && lessonParts.length > 0) {
-    const chapter = chapterParts.join('_');
-    const lesson = lessonParts.join('_');
-    
-    console.log(`✅ SUCCESS:`);
-    console.log(`   Chapter: "${chapter}"`);
-    console.log(`   Lesson: "${lesson}"`);
-    console.log(`   Will organize to: ${chapter}/${lesson}/`);
-    return { chapter, lesson, ext };
-  } else {
-    console.log(`❌ FAILED to extract chapter and lesson`);
-    console.log(`   Chapter parts: [${chapterParts.join(', ')}]`);
-    console.log(`   Lesson parts: [${lessonParts.join(', ')}]`);
-    return null;
-  }
+  console.log(`❌ FAILED - could not parse`);
+  return null;
 }
 
 console.log("=".repeat(60));
