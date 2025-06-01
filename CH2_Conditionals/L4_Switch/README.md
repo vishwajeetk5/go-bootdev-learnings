@@ -21,14 +21,14 @@
   <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="func getCreator(os string) string {
     var creator string
     switch os {
-    case &quot;linux&quot;:
-        creator = &quot;Linus Torvalds&quot;
-    case &quot;windows&quot;:
-        creator = &quot;Bill Gates&quot;
-    case &quot;mac&quot;:
-        creator = &quot;A Steve&quot;
+    case "linux":
+        creator = "Linus Torvalds"
+    case "windows":
+        creator = "Bill Gates"
+    case "mac":
+        creator = "A Steve"
     default:
-        creator = &quot;Unknown&quot;
+        creator = "Unknown"
     }
     return creator
 }" title="Copy to clipboard" data-event-click="true">
@@ -67,21 +67,21 @@
   <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="func getCreator(os string) string {
     var creator string
     switch os {
-    case &quot;linux&quot;:
-        creator = &quot;Linus Torvalds&quot;
-    case &quot;windows&quot;:
-        creator = &quot;Bill Gates&quot;
+    case "linux":
+        creator = "Linus Torvalds"
+    case "windows":
+        creator = "Bill Gates"
 
-    // all three of these cases will set creator to &quot;A Steve&quot;
-    case &quot;macOS&quot;:
+    // all three of these cases will set creator to "A Steve"
+    case "macOS":
         fallthrough
-    case &quot;Mac OS X&quot;:
+    case "Mac OS X":
         fallthrough
-    case &quot;mac&quot;:
-        creator = &quot;A Steve&quot;
+    case "mac":
+        creator = "A Steve"
 
     default:
-        creator = &quot;Unknown&quot;
+        creator = "Unknown"
     }
     return creator
 }" title="Copy to clipboard" data-event-click="true">

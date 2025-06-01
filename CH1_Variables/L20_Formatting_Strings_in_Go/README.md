@@ -23,10 +23,10 @@ s <span class="token operator">:=</span> fmt<span class="token punctuation">.</s
 <span class="token comment">// I am way too many years old</span>
 </code></pre>
 
-  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf(&quot;I am %v years old&quot;, 10)
+  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf("I am %v years old", 10)
 // I am 10 years old
 
-s := fmt.Sprintf(&quot;I am %v years old&quot;, &quot;way too many&quot;)
+s := fmt.Sprintf("I am %v years old", "way too many")
 // I am way too many years old" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -49,7 +49,7 @@ s := fmt.Sprintf(&quot;I am %v years old&quot;, &quot;way too many&quot;)
 <span class="token comment">// I am way too many years old</span>
 </code></pre>
 
-  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf(&quot;I am %s years old&quot;, &quot;way too many&quot;)
+  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf("I am %s years old", "way too many")
 // I am way too many years old" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -71,7 +71,7 @@ s := fmt.Sprintf(&quot;I am %v years old&quot;, &quot;way too many&quot;)
 <span class="token comment">// I am 10 years old</span>
 </code></pre>
 
-  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf(&quot;I am %d years old&quot;, 10)
+  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf("I am %d years old", 10)
 // I am 10 years old" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -97,11 +97,11 @@ s <span class="token operator">:=</span> fmt<span class="token punctuation">.</s
 <span class="token comment">// I am 10.52 years old</span>
 </code></pre>
 
-  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf(&quot;I am %f years old&quot;, 10.523)
+  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="s := fmt.Sprintf("I am %f years old", 10.523)
 // I am 10.523000 years old
 
-// The &quot;.2&quot; rounds the number to 2 decimal places
-s := fmt.Sprintf(&quot;I am %.2f years old&quot;, 10.523)
+// The ".2" rounds the number to 2 decimal places
+s := fmt.Sprintf("I am %.2f years old", 10.523)
 // I am 10.52 years old" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>

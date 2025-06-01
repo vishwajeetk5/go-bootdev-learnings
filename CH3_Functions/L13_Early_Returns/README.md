@@ -13,7 +13,7 @@
 
   <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="func divide(dividend, divisor int) (int, error) {
 	if divisor == 0 {
-		return 0, errors.New(&quot;can't divide by zero&quot;)
+		return 0, errors.New("can't divide by zero")
 	}
 	return dividend/divisor, nil
 }" title="Copy to clipboard">

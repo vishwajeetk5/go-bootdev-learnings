@@ -40,7 +40,7 @@
 <h2>Why Build Textio in a Compiled Language?</h2>
 </summary>
 <p>One of the most convenient things about using a compiled language like Go for Textio is that when we deploy our server we don't need to include any runtime language dependencies like Node or a Python interpreter. We just add the pre-compiled binary to the server and start it up!</p>
-<p></p><div class="video-wrapper w-fit m-auto relative"><video src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/compiled-vs-interpreted-languages.mp4" controls="" controlslist="nodownload" preload="metadata" playsinline="" width="1080&quot;" poster="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/gUNRY9t.png">
+<p></p><div class="video-wrapper w-fit m-auto relative"><video src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/compiled-vs-interpreted-languages.mp4" controls="" controlslist="nodownload" preload="metadata" playsinline="" width="1080"" poster="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/gUNRY9t.png">
 Your browser does not support playing HTML5 video.
 You can <a href="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/compiled-vs-interpreted-languages.mp4" download="">download the file</a> instead.
 Here is a description of the content: compiled vs interpreted languages

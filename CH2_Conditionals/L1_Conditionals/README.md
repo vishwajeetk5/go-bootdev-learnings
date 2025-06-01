@@ -8,7 +8,7 @@
 </code></pre>
 
   <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="if height > 4 {
-    fmt.Println(&quot;You are tall enough!&quot;)
+    fmt.Println("You are tall enough!")
 }" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -28,11 +28,11 @@
 </code></pre>
 
   <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="if height > 6 {
-    fmt.Println(&quot;You are super tall!&quot;)
+    fmt.Println("You are super tall!")
 } else if height > 4 {
-    fmt.Println(&quot;You are tall enough!&quot;)
+    fmt.Println("You are tall enough!")
 } else {
-    fmt.Println(&quot;You are not tall enough!&quot;)
+    fmt.Println("You are not tall enough!")
 }" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>

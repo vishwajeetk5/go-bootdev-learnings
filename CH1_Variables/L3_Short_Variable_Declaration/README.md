@@ -66,7 +66,7 @@ mySkillIssues = 42" title="Copy to clipboard" data-event-click="true">
   <pre class="language-go" tabindex="0"><code class="language-go">message <span class="token operator">:=</span> <span class="token string">"Hello, world!"</span>
 </code></pre>
 
-  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="message := &quot;Hello, world!&quot;" title="Copy to clipboard" data-event-click="true">
+  <button class="markdown-it-code-copy absolute right-2 top-2.5 z-10 m-1 h-6 w-6 cursor-pointer rounded bg-gray-950 text-gray-500 focus:outline-white hover:text-gray-200" data-clipboard-text="message := "Hello, world!"" title="Copy to clipboard" data-event-click="true">
     <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
   </svg>

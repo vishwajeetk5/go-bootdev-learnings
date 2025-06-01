@@ -21,7 +21,7 @@
 </summary>
 <p><img src="https://miro.medium.com/max/1400/1*Ggs-bJxobwZmrbfuoWGpFw.png" alt="idle memory"></p>
 <p>In the chart above, <a href="https://medium.com/@dexterdarwich/comparison-between-java-go-and-rust-fdb21bd5fb7c" target="_blank" rel="noopener nofollow">Dexter Darwich compares the memory usage</a> of three <em>very</em> simple programs written in Java, Go, and Rust. As you can see, Go and Rust use <em>very</em> little memory when compared to Java.</p>
-<p></p><div class="video-wrapper w-fit m-auto relative"><video src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/go-memory.mp4" controls="" controlslist="nodownload" preload="metadata" playsinline="" width="1080&quot;" poster="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/gUNRY9t.png">
+<p></p><div class="video-wrapper w-fit m-auto relative"><video src="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/go-memory.mp4" controls="" controlslist="nodownload" preload="metadata" playsinline="" width="1080"" poster="https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/gUNRY9t.png">
 Your browser does not support playing HTML5 video.
 You can <a href="https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/go-memory.mp4" download="">download the file</a> instead.
 Here is a description of the content: go vs rust
