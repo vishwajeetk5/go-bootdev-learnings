@@ -30,5 +30,10 @@ Here is a description of the content: go vs rust
 
 
 ## Quiz Results
+Generally speaking, which language uses the most memory?
+JAVA
 
+<br>
+What's one of the purposes of the Go runtime? To cleanup unused memory
+<br>
 *Quiz completed successfully*
