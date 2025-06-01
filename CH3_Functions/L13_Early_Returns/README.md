@@ -121,4 +121,5 @@
 
 ![Quiz Screenshot](./CH3_Functions_L13_Early_Returns_quiz_result.png)
 
-*Quiz completed successfully*
+Q.What is a guard clause?
+An early return from a function when a given condition is met
