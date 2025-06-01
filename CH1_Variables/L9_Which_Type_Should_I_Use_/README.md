@@ -53,4 +53,3 @@ myAgeInt := int(myAge)" title="Copy to clipboard">
 ![Quiz Screenshot](./CH1_Variables_L9_Which_Type_Should_I_Use__quiz_result.png)
 
 *Quiz completed successfully*
-
