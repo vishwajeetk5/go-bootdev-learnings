@@ -1,4 +1,4 @@
-// fixed-auto-organizer.js - With working image parser from test
+// final-auto-organizer.js - Complete working version with image support
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
@@ -7,7 +7,7 @@ const { execSync } = require("child_process");
 const DEFAULT_DOWNLOADS = "C:\\Users\\vishwajeetkoshti\\Downloads";
 const PROJECT_PATH = "C:\\Users\\vishwajeetkoshti\\Desktop\\bootdev-go";
 
-// WORKING PARSER - Copied directly from successful test
+// COMPLETE WORKING PARSER - Handles .go, .md, and image files
 function parseFilename(filename) {
   console.log(`🔍 Parsing: ${filename}`);
   
@@ -21,9 +21,9 @@ function parseFilename(filename) {
       const fullName = match[1];
       const ext = match[2];
       
-      console.log(`   🖼️ Analyzing image: ${fullName}`);
+      console.log(`   🖼️ Image file detected`);
       
-      // EXACT same logic as the successful test
+      // Strategy 1: Look for pattern CHX_ChapterName_LX_LessonName_suffix
       const lessonMatch = fullName.match(/^(CH\d+_.+?)_(L\d+_.+?)_(?:quiz|result|screenshot|answer).*$/i);
       
       if (lessonMatch) {
@@ -33,14 +33,14 @@ function parseFilename(filename) {
         console.log(`✅ Image parsed: Chapter="${chapter}", Lesson="${lesson}"`);
         return { chapter, lesson, ext, isReadme: false, isImage: true, originalName: filename };
       } else {
-        // Fallback strategy
-        console.log(`   Strategy 1 failed, trying fallback...`);
+        // Strategy 2: Fallback - find last _L occurrence
+        console.log(`   Trying fallback strategy...`);
         const lastLIndex = fullName.lastIndexOf('_L');
         if (lastLIndex !== -1) {
           const beforeL = fullName.substring(0, lastLIndex);
           const afterL = fullName.substring(lastLIndex + 1);
           
-          console.log(`   Before L: "${beforeL}", After L: "${afterL}"`);
+          // Remove known suffixes from the end
           const cleanAfterL = afterL.replace(/_(?:quiz|result|screenshot|answer).*$/i, '');
           
           if (cleanAfterL) {
@@ -56,10 +56,13 @@ function parseFilename(filename) {
       console.log(`❌ Could not parse image filename`);
     }
   } else if (isReadme) {
-    // Handle README files
+    // Handle README files: CH3_Functions_L13_Early_Returns_README.md
     const match = filename.match(/^(.+)_README\.md$/i);
     if (match) {
       const fullName = match[1];
+      console.log(`   📝 README file detected`);
+      
+      // Split at the last occurrence of _L to separate chapter from lesson
       const lastLIndex = fullName.lastIndexOf('_L');
       if (lastLIndex !== -1) {
         const chapter = fullName.substring(0, lastLIndex).replace(/__/g, '_');
@@ -69,13 +72,17 @@ function parseFilename(filename) {
         return { chapter, lesson, ext: 'md', isReadme: true, isImage: false, originalName: filename };
       }
     }
+    console.log(`❌ Could not parse README filename`);
   } else {
-    // Handle code files
+    // Handle code files: CH3_Functions_L13_Early_Returns_L13_Early_Returns.go
     const match = filename.match(/^(.+)\.go$/i);
     if (match) {
       const fullName = match[1];
+      console.log(`   💻 Go file detected`);
+      
       const parts = fullName.split('_');
       
+      // Find where lesson starts (first part that starts with L and has numbers)
       let lessonStartIndex = -1;
       for (let i = 0; i < parts.length; i++) {
         if (parts[i].match(/^L\d+/)) {
@@ -87,16 +94,19 @@ function parseFilename(filename) {
       if (lessonStartIndex !== -1) {
         const chapterParts = parts.slice(0, lessonStartIndex);
         const lessonParts = parts.slice(lessonStartIndex);
+        
+        // For lesson, take up to the duplicate (usually halfway point)
         const halfwayPoint = Math.ceil(lessonParts.length / 2);
         const lessonName = lessonParts.slice(0, halfwayPoint);
         
         const chapter = chapterParts.join('_').replace(/__/g, '_');
         const lesson = lessonName.join('_').replace(/__/g, '_');
         
-        console.log(`✅ Code file parsed: Chapter="${chapter}", Lesson="${lesson}"`);
+        console.log(`✅ Go file parsed: Chapter="${chapter}", Lesson="${lesson}"`);
         return { chapter, lesson, ext: 'go', isReadme: false, isImage: false, originalName: filename };
       }
     }
+    console.log(`❌ Could not parse Go filename`);
   }
   
   console.log(`❌ Could not parse: ${filename}`);
@@ -134,23 +144,24 @@ function organizeFiles() {
       console.log(`📁 Created: ${path.relative(PROJECT_PATH, lessonDir)}`);
     }
 
+    // Determine new filename
     let newFilename;
     if (isReadme) {
       newFilename = "README.md";
     } else if (isImage) {
-      // Keep the descriptive part of the image name
-      const originalParts = file.split('_');
-      const suffix = originalParts.slice(-2).join('_'); // Get last 2 parts like "quiz_result.png"
-      newFilename = suffix;
+      // KEEP ORIGINAL IMAGE FILENAME - This ensures links in README work
+      newFilename = file;
     } else {
+      // Go files use lesson name
       newFilename = `${lesson}.${ext}`;
     }
     
     const newPath = path.join(lessonDir, newFilename);
 
+    // Check if file already exists
     if (fs.existsSync(newPath)) {
       console.log(`⚠️ File already exists: ${path.relative(PROJECT_PATH, newPath)}`);
-      fs.unlinkSync(fullPath);
+      fs.unlinkSync(fullPath); // Remove duplicate from downloads
       return;
     }
 
@@ -169,18 +180,27 @@ function organizeFiles() {
 
 function clearDownloadsFolder() {
   const downloadsDir = path.join(PROJECT_PATH, "downloads");
+  
+  if (!fs.existsSync(downloadsDir)) return;
+  
   const files = fs.readdirSync(downloadsDir);
+  let clearedCount = 0;
   
   files.forEach((file) => {
     const filePath = path.join(downloadsDir, file);
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
       try {
         fs.unlinkSync(filePath);
+        clearedCount++;
       } catch (error) {
         console.error(`❌ Error removing ${file}:`, error.message);
       }
     }
   });
+  
+  if (clearedCount > 0) {
+    console.log(`🧹 Cleared ${clearedCount} files from downloads`);
+  }
 }
 
 function gitCommitAndPush() {
@@ -218,6 +238,7 @@ function gitCommitAndPush() {
 }
 
 function isLessonFile(filename) {
+  // Match lesson files: .go, .md, and image files (.png, .jpg, .jpeg)
   return filename.match(/^CH\d+.*L\d+.*\.(go|md|png|jpg|jpeg)$/i);
 }
 
@@ -244,7 +265,7 @@ function moveFromDownloads() {
       try {
         if (fs.existsSync(targetPath)) {
           console.log(`⚠️ File already exists in project: ${file}`);
-          fs.unlinkSync(sourcePath);
+          fs.unlinkSync(sourcePath); // Remove duplicate from default downloads
           return;
         }
         
@@ -264,6 +285,7 @@ function moveFromDownloads() {
 function runCompleteWorkflow() {
   console.log("🔄 Running complete workflow...\n");
   
+  // Step 1: Move files from default Downloads to project downloads
   const movedCount = moveFromDownloads();
   if (movedCount === 0) {
     console.log("ℹ️ No lesson files found in Downloads");
@@ -272,6 +294,7 @@ function runCompleteWorkflow() {
   
   console.log(`📦 Moved ${movedCount} files\n`);
   
+  // Step 2: Organize files from project downloads into lesson folders
   const orgResult = organizeFiles();
   if (!orgResult.success) {
     console.log("⚠️ No files were organized");
@@ -280,9 +303,10 @@ function runCompleteWorkflow() {
   
   console.log(`\n📁 Organized ${orgResult.filesOrganized} files\n`);
   
+  // Step 3: Clear the downloads folder
   clearDownloadsFolder();
-  console.log("🧹 Cleared downloads folder\n");
   
+  // Step 4: Git commit and push
   gitCommitAndPush();
   
   console.log("\n🎉 Workflow completed successfully!");
@@ -316,7 +340,7 @@ function watchMode() {
 // Main execution
 const command = process.argv[2];
 
-console.log("📚 FIXED Go Lesson Auto-Organizer\n");
+console.log("📚 Final Go Lesson Auto-Organizer\n");
 
 switch (command) {
   case "watch":
@@ -327,9 +351,14 @@ switch (command) {
     break;
   default:
     console.log("Usage:");
-    console.log("  node fixed-auto-organizer.js sync   - Organize files once");
-    console.log("  node fixed-auto-organizer.js watch  - Watch and auto-organize");
+    console.log("  node final-auto-organizer.js sync   - Organize files once");
+    console.log("  node final-auto-organizer.js watch  - Watch and auto-organize");
     console.log("\n📁 Configuration:");
     console.log(`  Downloads: ${DEFAULT_DOWNLOADS}`);
     console.log(`  Project: ${PROJECT_PATH}`);
+    console.log("\n✅ Features:");
+    console.log("  - Handles .go, .md, and image files (.png, .jpg, .jpeg)");
+    console.log("  - Preserves original image filenames for proper README links");
+    console.log("  - Auto Git commit and push");
+    console.log("  - Clean error handling and logging");
 }
