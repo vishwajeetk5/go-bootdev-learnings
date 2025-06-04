@@ -1,8 +1,8 @@
 package main
 
 type sender struct {
-	rateLimit int
 	user
+	rateLimit int
 }
 
 type user struct {
