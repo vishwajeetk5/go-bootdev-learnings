@@ -8,4 +8,6 @@ type authenticationInfo struct {
 
 
 // create the method below
-
+func (a authenticationInfo) authenticate() string {
+	return "Authorization: Basic "+a.username+":"+a.password
+}
