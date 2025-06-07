@@ -30,4 +30,6 @@ empty := emptyStruct{}" title="Copy to clipboard">
 
 ## Quiz Results
 
+![Quiz Screenshot](./CH4_Structs_L8_Empty_Struct_quiz_result.png)
+
 *Quiz completed successfully*
