@@ -1,16 +1,20 @@
 package main
 
 type contact struct {
-	userID       string
-	sendingLimit int32
-	age          int32
+	userID       string  //8 bytes
+	sendingLimit int32   //4 bytes
+	age          int32   //4 bytes
 }
 
 type perms struct {
-	permissionLevel int
+	
 	canSend         bool
 	canReceive      bool
 	canManage       bool
+	_               byte  //padding optional
+	permissionLevel int  
+
+	//total size: 1 + 1 + 1 + 1 + 8 = 12 bytes else 16
 }
 
 //Rearranged properly for proper memory layout without padding and wastage of memory
